@@ -1,0 +1,140 @@
+﻿@model IEnumerable<EventEaseApplication.Models.BookingEventEase>
+
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<div class="container">
+    <h1 class="mb-4">Bookings</h1>
+    <hr />
+
+    <p>
+        <a asp-action="Create" class="btn btn-sm"
+           style="font-family: 'Lora', serif; background-color: white; color: black; border: 1px solid #d6a2b8;"
+           onmouseover="this.style.backgroundColor='rgb(214,162,184)';this.style.color='black';this.style.borderColor= rgb(214,162,184);"
+           onmouseout="this.style.backgroundColor='white';this.style.color='black';this.style.borderColor='#d6a2b8'">Add a Booking</a>
+    </p>
+    <hr />
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Booking #@item.BookingId</h5>
+                        <small class="text-muted">@item.BookingDate?.ToString("MMM dd, yyyy")</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <strong>Event:</strong> @item.Event?.EventName (ID: @item.EventId)
+                        </div>
+                        <div class="mb-2">
+                            <strong>Venue:</strong> @item.Venue?.VenueName (ID: @item.VenueId)
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Edit" asp-route-id="@item.BookingId" class="btn btn-sm btn-edit">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.BookingId" class="btn btn-sm btn-details">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.BookingId" class="btn btn-sm btn-delete">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&display=swap');
+    @@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(12px);
+        padding: 1rem;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .card {
+        box-shadow: 0 4px 12px rgb(254,199,204);
+        border-radius: 10px;
+        transition: transform 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgb(254,199,204);
+        }
+
+    .card-header {
+        font-family: 'Lora', serif;
+        font-weight: 700;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .btn {
+        font-family: 'Lora', serif;
+        font-weight: 500;
+        padding: 6px 12px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-create {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+    }
+
+        .btn-create:hover {
+            background-color: rgb(225,255,173);
+            color: black;
+            border-color: rgb(225,255,173);
+        }
+
+    .btn-edit, .btn-details {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+    }
+
+        .btn-edit:hover, .btn-details:hover {
+            background-color: rgb(225,255,173);
+            color: black;
+            border-color: rgb(225,255,173);
+        }
+
+    .btn-delete {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+    }
+
+        .btn-delete:hover {
+            background-color: rgb(131,1,12);
+            color: white;
+            border-color: rgb(131,1,12);
+        }
+
+    .text-muted {
+        font-size: 0.9rem;
+    }
+</style>

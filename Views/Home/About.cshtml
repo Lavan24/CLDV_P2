@@ -1,0 +1,74 @@
+﻿@*This is what the user would see on the tabs at the top of the page.*@
+@{
+    ViewData["Title"] = "About";
+}
+
+@*We created a class called about-page-panel. This is to store all the information in one place.*@
+<div class="about-page-panel">
+    @*This is the title of the page.*@
+    <h1>About EventEase</h1>
+    @*This is the body of information about EventEase*@
+    <p>
+        EventEase is a trusted catering and event planning company. We have been serving clients since 2004.
+        Our team specializes in creating memorable events. We cater to weddings, corporate events, and private parties. Quality service and customer satisfaction are our priorities.
+    </p>
+    <p>
+        Our catering team prepares delicious and fresh meals. We offer a variety of menu options for every occasion. Our chefs use high-quality ingredients for great taste.
+        We customize menus to suit your needs. Every dish is made with care and expertise.
+    </p>
+    <p>
+        Our event planning team handles every detail. We help with venue selection, decor, and entertainment.
+        We ensure smooth coordination from start to finish. Our goal is to bring your vision to life.
+        We make event planning stress-free and enjoyable.
+    </p>
+    <p>
+        At EventEase, we value professionalism and creativity. Our team listens to your ideas and makes them a reality.
+        We believe in delivering excellence in every event. Customer satisfaction is at the heart of our business.
+        Let us make your next event unforgettable!
+    </p>
+</div>
+
+@*We have created a style tag here to store all information. *@
+<style>
+    .about-page-panel {
+        background-color: rgba(255, 195, 206, 0.5);
+        font-family: 'Lora', serif;
+        padding: 30px 40px;
+        border-radius: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin: 100px auto;
+        max-width: 800px;
+        color: #333;
+    }
+
+        .about-page-panel h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-family: 'Raleway', serif;
+        }
+
+        .about-page-panel p {
+            font-size: 1.3rem;
+            text-align: justify;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-family: 'Lora', serif;
+        }
+
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(12px);
+        padding: 1rem;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+</style>

@@ -1,0 +1,150 @@
+﻿@model EventEaseApplication.Models.EventEventEase
+
+@{
+    ViewData["Title"] = "Event Details";
+}
+
+<h1 class="mb-4">Event Details</h1>
+<hr />
+
+<p>
+    <a asp-action="Create" class="btn btn-sm"
+       style="font-family: 'Lora', serif; background-color: white; color: black; border: 1px solid #d6a2b8;"
+       onmouseover="this.style.backgroundColor='rgb(214,162,184)';this.style.color='black';this.style.borderColor= rgb(214,162,184);"
+       onmouseout="this.style.backgroundColor='white';this.style.color='black';this.style.borderColor='#d6a2b8'">Add an Event</a>
+</p>
+<hr />
+
+<div class="container mt-4">
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <dl class="row">
+                        <dt class="col-sm-3">
+                            Event ID:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.EventId)
+                        </dd>
+                        <dt class="col-sm-3">
+                            Event Name:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.EventName)
+                        </dd>
+                        <dt class="col-sm-3">
+                            Event Date:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.EventDate)
+                        </dd>
+                        <dt class="col-sm-3">
+                            Event Description:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.EventDescription)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-white border-top-0">
+            <div class="d-flex justify-content-between">
+                <a asp-action="Edit" asp-route-id="@Model?.EventId" class="btn btn-sm"
+                   style="font-family: 'Lora', serif; background-color: white; color: black; border: 1px solid #ddd;"
+                   onmouseover="this.style.backgroundColor='rgb(225,255,173)';this.style.color='black';this.style.borderColor='rgb(225,255,173)'"
+                   onmouseout="this.style.backgroundColor='white';this.style.color='black';this.style.borderColor='#ddd'">
+                    Edit
+                </a>
+                <a asp-action="Index" class="btn btn-sm"
+                   style="font-family: 'Lora', serif; background-color: white; color: black; border: 1px solid #ddd;"
+                   onmouseover="this.style.backgroundColor='rgb(225,255,173)';this.style.color='black';this.style.borderColor='rgb(225,255,173)'"
+                   onmouseout="this.style.backgroundColor='white';this.style.color='black';this.style.borderColor='#ddd'">
+                    Index
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&display=swap');
+    @@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        text-align: center;
+        margin-top: 20px;
+        z-index: 10;
+    }
+
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(12px);
+        padding: 1rem;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    dt {
+        font-family: 'Lora', serif;
+        font-weight: 700;
+        color: #333;
+        padding-bottom: 5px;
+    }
+
+    dd {
+        font-family: 'Lora', serif;
+        font-weight: 500;
+        margin-bottom: 1.2rem;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .card {
+        box-shadow: 0 4px 12px rgb(254,199,204);
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        transition: transform 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgb(254,199,204);
+        }
+
+    .card-body {
+        background-color: white;
+        margin: 0 15px;
+        border-radius: 8px;
+        box-shadow: inset 0 0 8px rgb(254,199,204);
+        padding: 25px;
+    }
+
+    .card-header, .card-footer {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .btn-create {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+    }
+
+        .btn-create:hover {
+            background-color: rgb(225,255,173);
+            color: black;
+            border-color: rgb(225,255,173);
+        }
+</style>

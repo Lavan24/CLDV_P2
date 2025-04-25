@@ -1,0 +1,154 @@
+﻿@model EventEaseApplication.Models.BookingEventEase
+
+
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+<h1 class="mb-4">Edit Booking</h1>
+<hr />
+
+<div class="text-end mb-4">
+    <a asp-action="Create" class="btn btn-create">
+        Create New Event
+    </a>
+</div>
+<hr />
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="Edit" class="edit-form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="BookingId" />
+
+                <div class="form-group mb-4">
+                    <label asp-for="VenueId" class="form-label">Venue:</label>
+                    <select asp-for="VenueId" class="form-control custom-input" asp-items="ViewBag.VenueId">
+                        <option value="">-- Select Venue --</option>
+                    </select>
+                    <span asp-validation-for="VenueId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="EventId" class="form-label">Event:</label>
+                    <select asp-for="EventId" class="form-control custom-input" asp-items="ViewBag.EventId">
+                        <option value="">-- Select Event --</option>
+                    </select>
+                    <span asp-validation-for="EventId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="BookingDate" class="form-label">Booking Date:</label>
+                    <input asp-for="BookingDate" class="form-control custom-input" />
+                    <span asp-validation-for="BookingDate" class="text-danger"></span>
+                </div>
+
+                <div class="card-footer bg-white border-top-0 px-0">
+                    <div class="d-flex justify-content-between">
+                        <input type="submit" value="Save" class="btn btn-sm"
+                               style="font-family: 'Lora', serif; background-color: white; color: black; border: 1px solid #ddd;"
+                               onmouseover="this.style.backgroundColor='rgb(225,255,173)';this.style.color='black';this.style.borderColor='rgb(225,255,173)'"
+                               onmouseout="this.style.backgroundColor='white';this.style.color='black';this.style.borderColor='#ddd'" />
+
+                        <a asp-action="Index" class="btn btn-sm"
+                           style="font-family: 'Lora', serif; background-color: white; color: black; border: 1px solid #ddd;"
+                           onmouseover="this.style.backgroundColor='rgb(225,255,173)';this.style.color='black';this.style.borderColor='rgb(225,255,173)'"
+                           onmouseout="this.style.backgroundColor='white';this.style.color='black';this.style.borderColor='#ddd'">Index</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&display=swap');
+    @@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+    @@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        text-align: center;
+        margin: 30px 0 20px;
+    }
+
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(12px);
+        padding: 1rem;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .form-label {
+        font-family: 'Lora', serif;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .custom-input {
+        border: 2px solid #789461;
+        border-radius: 10px;
+        font-family: 'Josefin Sans', sans-serif;
+        padding: 8px;
+    }
+
+    .form-control:focus {
+        border-color: rgb(254,199,204);
+        box-shadow: 0 0 0 0.2rem rgba(254,199,204,0.25);
+    }
+
+    .edit-form {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(254,199,204,0.3);
+    }
+
+    select.form-control {
+        height: auto;
+        padding: 8px;
+    }
+
+    .card {
+        box-shadow: 0 4px 12px rgb(254,199,204);
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        transition: transform 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgb(254,199,204);
+        }
+
+    .btn-create {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+    }
+
+        .btn-create:hover {
+            background-color: rgb(225,255,173);
+            color: black;
+            border-color: rgb(225,255,173);
+        }
+</style>

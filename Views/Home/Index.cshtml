@@ -1,0 +1,208 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+@*Link for all the fonts used*@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&family=EB+Garamond:wght@400;700&display=swap" rel="stylesheet">
+
+@*Style tag to store all the .CSS and styling concepts*@
+<style>
+    body {
+        font-family: 'Lora', serif;
+        background-color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        font-family: 'Lora', serif;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(12px);
+        padding: 1rem;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background: url('/images/background.jpeg') no-repeat center center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .overlay {
+        position: absolute;
+        background: rgba(137, 71, 1, 0.6);
+        color: white;
+        padding: 30px;
+        text-align: center;
+        border-radius: 15px;
+        max-width: 900px;
+        width: 90%;
+    }
+
+    .content {
+        font-family: 'EB Garamond', serif;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .image-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 30px;
+        background: rgba(56, 79, 30, 0.5);
+        padding: 20px;
+    }
+
+    .image-item {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgb(238, 242, 209);
+        }
+
+    .review-panel {
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .reviews-heading {
+        font-family: 'Lora', serif;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .review-section {
+        display: flex;
+        overflow-x: auto;
+        width: 100%;
+        padding: 20px 0;
+        gap: 20px;
+        scroll-snap-type: x mandatory;
+    }
+
+    .review {
+        flex: 0 0 auto;
+        background: rgb(255, 202, 214);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: justify;
+        margin-right: 20px;
+        width: 300px;
+        scroll-snap-align: start;
+    }
+
+    .review-img {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 10px;
+    }
+
+    .review-text {
+        font-family: 'Lora', serif;
+        font-size: 1rem;
+        text-align: justify;
+        white-space: normal;
+        display: block;
+        padding: 10px;
+    }
+</style>
+
+@*This is the overlay that goes over image*@
+<div class="hero">
+    <div class="overlay">
+        <h1 class="display-4">Welcome to EventEase</h1>
+        <h5>EventEase – Effortless Events, Unforgettable Moments!</h5>
+    </div>
+</div>
+
+@*This is the main content. Giving information bout EventEsae*@
+<div class="content">
+    <h2>Celebrating Happiness!</h2>
+    <p>
+        Event Ease is a renowned event planning company that has been crafting memorable
+        experiences since 2004. With a passionate team of experts, they specialize in
+        organizing birthdays, weddings, and corporate events. Their commitment to excellence
+        ensures that every event is unique and perfectly tailored to their clients' needs.
+        From intimate gatherings to grand celebrations, Event Ease brings dreams to life
+        with flair and precision.
+    </p>
+
+    <p>
+        Over the years, Event Ease has built a reputation for impeccable attention to detail
+        and seamless execution. They have worked across diverse locations, creating
+        unforgettable moments for clients from all walks of life. Whether it’s a picturesque
+        outdoor wedding or a sophisticated corporate gala, their expertise ensures perfection
+        at every turn. Event Ease turns visions into reality,
+        leaving clients with cherished memories.
+    </p>
+</div>
+
+@*This is the image grid. where all the images are layed out in grid*@
+<div class="image-grid">
+    <div class="image-item"><img src="/images/image1.jpeg" alt="Event Image 1"></div>
+    <div class="image-item"><img src="/images/image2.jpeg" alt="Event Image 2"></div>
+    <div class="image-item"><img src="/images/image3.jpg" alt="Event Image 3"></div>
+    <div class="image-item"><img src="/images/image4.jpeg" alt="Event Image 4"></div>
+    <div class="image-item"><img src="/images/image5.jpeg" alt="Event Image 5"></div>
+    <div class="image-item"><img src="/images/image6.jpeg" alt="Event Image 6"></div>
+</div>
+
+@*This where the client reviews are stored.*@
+<div class="review-panel">
+    <h3 class="reviews-heading">Reviews</h3>
+
+    <div class="review-section">
+        <div class="review">
+            <img src="/images/review.jpeg" alt="Client Review" class="review-img">
+            <p class="review-text">
+                "EventEase made my Sweet 16 birthday unforgettable!
+                The team was so professional and creative, and they truly brought my vision to life.
+                The decorations were stunning, the food was amazing, and the atmosphere was perfect.
+                I couldn't have asked for a better celebration!"
+            </p>
+        </div>
+        <div class="review">
+            <img src="/images/review3.jpg" alt="Client Review" class="review-img">
+            <p class="review-text">
+                "EventEase made my wedding unforgettable. Every detail was beautifully arranged.
+                The team was professional and attentive. I couldn’t have asked for a better experience!"
+            </p>
+        </div>
+        <div class="review">
+            <img src="/images/review2.jpg" alt="Client Review" class="review-img">
+            <p class="review-text">
+                "My birthday party was a huge success thanks to EventEase. They took care of everything perfectly.
+                The decorations were stunning and matched the theme. Guests kept complimenting the setup!"
+            </p>
+        </div>
+    </div>
+</div>

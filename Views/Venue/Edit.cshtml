@@ -1,0 +1,148 @@
+﻿@model EventEaseApplication.Models.VenueEventEase
+
+@{
+    ViewData["Title"] = "Edit Venue";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Edit Venue</h1>
+    <hr />
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="Edit" class="edit-form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="VenueId" />
+
+                <div class="form-group mb-4">
+                    <label asp-for="VenueName" class="form-label">Venue Name:</label>
+                    <input asp-for="VenueName" class="form-control custom-input" />
+                    <span asp-validation-for="VenueName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="VenueLocation" class="form-label">Venue Location:</label>
+                    <input asp-for="VenueLocation" class="form-control custom-input" />
+                    <span asp-validation-for="VenueLocation" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="VenueCapacity" class="form-label">Venue Capacity:</label>
+                    <input asp-for="VenueCapacity" class="form-control custom-input" />
+                    <span asp-validation-for="VenueCapacity" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="ImageUrl" class="form-label">Image URL:</label>
+                    <input asp-for="ImageUrl" class="form-control custom-input" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-save">Save Changes</button>
+                    <a asp-action="Index" class="btn btn-back">Index</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Lora:wght@500;700&display=swap');
+    @@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+    @@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        text-align: center;
+        margin: 30px 0 20px;
+    }
+
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(12px);
+        padding: 1rem;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .form-control.custom-input {
+        border: 2px solid #789461;
+        border-radius: 10px;
+        font-family: 'Josefin Sans', sans-serif;
+        padding: 8px;
+    }
+
+    .form-label {
+        font-family: 'Lora', serif;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        font-family: 'Lora', serif;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 10px 15px;
+    }
+
+        .form-control:focus {
+            border-color: rgb(254,199,204);
+            box-shadow: 0 0 0 0.2rem rgba(254,199,204,0.25);
+        }
+
+    .btn {
+        font-family: 'Lora', serif;
+        font-weight: 500;
+        padding: 8px 20px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-save {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+    }
+
+        .btn-save:hover {
+            background-color: rgb(225,255,173);
+            color: black;
+            border-color: rgb(225,255,173);
+        }
+
+    .btn-back {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+    }
+
+        .btn-back:hover {
+            background-color: rgb(225,255,173);
+            color: black;
+            border-color: rgb(225,255,173);
+        }
+
+    .edit-form {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(254,199,204,0.3);
+    }
+</style>
