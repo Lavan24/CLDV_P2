@@ -30,6 +30,12 @@
                             <strong>Event:</strong> @item.Event?.EventName (ID: @item.EventId)
                         </div>
                         <div class="mb-2">
+                            <strong>Description:</strong> @item.Event?.EventDescription
+                        </div>
+                        <div class="mb-2">
+							<strong>Time:</strong> @item.Booking_Time?.ToString("hh:mm tt")
+                        </div>
+                        <div class="mb-2">
                             <strong>Venue:</strong> @item.Venue?.VenueName (ID: @item.VenueId)
                         </div>
                     </div>
@@ -44,6 +50,7 @@
             </div>
         }
     </div>
+
 </div>
 
 <style>

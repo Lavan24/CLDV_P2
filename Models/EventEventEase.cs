@@ -11,6 +11,8 @@ public partial class EventEventEase
 
     public DateOnly? EventDate { get; set; }
 
+    public TimeOnly? Event_Time { get; set; }
+
     public string? EventDescription { get; set; }
 
     public virtual ICollection<BookingEventEase> BookingEventEases { get; set; } = new List<BookingEventEase>();

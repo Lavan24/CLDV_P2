@@ -53,7 +53,7 @@ namespace EventEaseApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventId,EventName,EventDate,EventDescription")] EventEventEase eventEventEase)
+        public async Task<IActionResult> Create([Bind("EventId,EventName,EventDate,EventDescription,Event_Time")] EventEventEase eventEventEase)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace EventEaseApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventId,EventName,EventDate,EventDescription")] EventEventEase eventEventEase)
+        public async Task<IActionResult> Edit(int id, [Bind("EventId,EventName,EventDate,EventDescription,Event_Time")] EventEventEase eventEventEase)
         {
             if (id != eventEventEase.EventId)
             {

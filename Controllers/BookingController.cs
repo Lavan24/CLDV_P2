@@ -48,17 +48,15 @@ namespace EventEaseApplication.Controllers
         // GET: Booking/Create
         public IActionResult Create()
         {
-            ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventId");
-            ViewData["VenueId"] = new SelectList(_context.VenueEventEases, "VenueId", "VenueId");
+            ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventName");
+            ViewData["VenueId"] = new SelectList(_context.VenueEventEases, "VenueId", "VenueName");
             return View();
         }
 
         // POST: Booking/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookingId,VenueId,EventId,BookingDate")] BookingEventEase bookingEventEase)
+        public async Task<IActionResult> Create([Bind("BookingId,VenueId,EventId,BookingDate,Booking_Time")] BookingEventEase bookingEventEase)
         {
             if (ModelState.IsValid)
             {
@@ -66,8 +64,8 @@ namespace EventEaseApplication.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventId", bookingEventEase.EventId);
-            ViewData["VenueId"] = new SelectList(_context.VenueEventEases, "VenueId", "VenueId", bookingEventEase.VenueId);
+            ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventName", bookingEventEase.EventId);
+            ViewData["VenueId"] = new SelectList(_context.VenueEventEases, "VenueId", "VenueName", bookingEventEase.VenueId);
             return View(bookingEventEase);
         }
 
@@ -84,17 +82,15 @@ namespace EventEaseApplication.Controllers
             {
                 return NotFound();
             }
-            ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventId", bookingEventEase.EventId);
-            ViewData["VenueId"] = new SelectList(_context.VenueEventEases, "VenueId", "VenueId", bookingEventEase.VenueId);
+            ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventName", bookingEventEase.EventId);
+            ViewData["VenueId"] = new SelectList(_context.VenueEventEases, "VenueId", "VenueName", bookingEventEase.VenueId);
             return View(bookingEventEase);
         }
 
         // POST: Booking/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookingId,VenueId,EventId,BookingDate")] BookingEventEase bookingEventEase)
+        public async Task<IActionResult> Edit(int id, [Bind("BookingId,VenueId,EventId,BookingDate,Booking_Time")] BookingEventEase bookingEventEase)
         {
             if (id != bookingEventEase.BookingId)
             {
@@ -121,8 +117,8 @@ namespace EventEaseApplication.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventId", bookingEventEase.EventId);
-            ViewData["VenueId"] = new SelectList(_context.VenueEventEases, "VenueId", "VenueId", bookingEventEase.VenueId);
+            ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventName", bookingEventEase.EventId);
+            ViewData["VenueId"] = new SelectList(_context.VenueEventEases, "VenueId", "VenueName", bookingEventEase.VenueId);
             return View(bookingEventEase);
         }
 

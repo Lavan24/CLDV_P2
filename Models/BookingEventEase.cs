@@ -13,6 +13,8 @@ public partial class BookingEventEase
 
     public DateOnly? BookingDate { get; set; }
 
+    public TimeOnly? Booking_Time { get; set; }
+
     public virtual EventEventEase? Event { get; set; }
 
     public virtual VenueEventEase? Venue { get; set; }
