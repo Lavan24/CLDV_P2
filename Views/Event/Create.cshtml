@@ -26,16 +26,17 @@
                 </div>
 
                 <div class="form-group mb-4">
-                    <label asp-for="EventDescription" class="form-label">Booking Date:</label>
-                    <input asp-for="EventDescription" class="form-control custom-input" type="date" />
-                    <span asp-validation-for="EventDescription" class="text-danger"></span>
+                    <label asp-for="EventDate" class="form-label">Event Date:</label>
+                    <input asp-for="EventDate" class="form-control custom-input" type="date" />
+                    <span asp-validation-for="EventDate" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mb-4">
-                    <label asp-for="Event_Time" class="form-label">Booking Time:</label>
+                    <label asp-for="Event_Time" class="form-label">Event Time:</label>
                     <input asp-for="Event_Time" class="form-control custom-input" type="time" />
                     <span asp-validation-for="Event_Time" class="text-danger"></span>
                 </div>
+
 
                 <div class="form-group d-flex justify-content-between mt-4">
                     <button type="submit" class="btn btn-create">Create Event</button>

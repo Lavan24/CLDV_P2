@@ -60,14 +60,33 @@ namespace EventEaseApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool isDoubleBooked = await _context.BookingEventEases.AnyAsync(b =>
+                    b.VenueId == bookingEventEase.VenueId &&
+                    b.BookingDate == bookingEventEase.BookingDate &&
+                    b.Booking_Time == bookingEventEase.Booking_Time
+                );
+
+                if (isDoubleBooked)
+                {
+                    ModelState.AddModelError(string.Empty, "This venue is already booked for the selected date and time.");
+
+                    ViewData["VenueId"] = new SelectList(_context.VenueEventEases, "VenueId", "VenueName", bookingEventEase.VenueId);
+                    ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventName", bookingEventEase.EventId);
+
+                    return View(bookingEventEase);
+                }
+
                 _context.Add(bookingEventEase);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventName", bookingEventEase.EventId);
+
             ViewData["VenueId"] = new SelectList(_context.VenueEventEases, "VenueId", "VenueName", bookingEventEase.VenueId);
+            ViewData["EventId"] = new SelectList(_context.EventEventEases, "EventId", "EventName", bookingEventEase.EventId);
+
             return View(bookingEventEase);
         }
+
 
         // GET: Booking/Edit/5
         public async Task<IActionResult> Edit(int? id)
