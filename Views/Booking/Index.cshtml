@@ -8,10 +8,17 @@
     <h1 class="mb-4">Bookings</h1>
     <hr />
 
+    <form asp-action="Index" method="get" class="form-inline mb-4 d-flex justify-content-center">
+        <input type="text" name="searchString" class="form-control mr-2 search-bar" placeholder="Search by Booking ID or Event Name" />
+        <button type="submit" class="btn btn-sm search-button">
+            Search
+        </button>
+    </form>
+
     <p>
         <a asp-action="Create" class="btn btn-sm"
            style="font-family: 'Lora', serif; background-color: white; color: black; border: 1px solid #d6a2b8;"
-           onmouseover="this.style.backgroundColor='rgb(214,162,184)';this.style.color='black';this.style.borderColor= rgb(214,162,184);"
+           onmouseover="this.style.backgroundColor='rgb(214,162,184)';this.style.color='black';this.style.borderColor= 'rgb(214,162,184)';"
            onmouseout="this.style.backgroundColor='white';this.style.color='black';this.style.borderColor='#d6a2b8'">Add a Booking</a>
     </p>
     <hr />
@@ -33,7 +40,7 @@
                             <strong>Description:</strong> @item.Event?.EventDescription
                         </div>
                         <div class="mb-2">
-							<strong>Time:</strong> @item.Booking_Time?.ToString("hh:mm tt")
+                            <strong>Time:</strong> @item.Booking_Time?.ToString("hh:mm tt")
                         </div>
                         <div class="mb-2">
                             <strong>Venue:</strong> @item.Venue?.VenueName (ID: @item.VenueId)
@@ -64,46 +71,36 @@
         margin-top: 20px;
     }
 
-
-    nav {
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80%;
-        background: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(12px);
-        padding: 1rem;
-        border-radius: 30px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-    }
-
-    .card {
-        box-shadow: 0 4px 12px rgb(254,199,204);
+    /* Search Bar Styling */
+    .search-bar {
+        border: 2px solid #789461;
         border-radius: 10px;
-        transition: transform 0.3s;
+        font-family: 'Josefin Sans', sans-serif;
+        padding: 8px;
+        width: 300px;
+        margin-right: 10px; /* Space between search bar and button */
     }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgb(254,199,204);
-        }
-
-    .card-header {
-        font-family: 'Lora', serif;
-        font-weight: 700;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
+    /* Button Styling */
     .btn {
         font-family: 'Lora', serif;
         font-weight: 500;
-        padding: 6px 12px;
+        padding: 8px 20px;
         border-radius: 4px;
         transition: all 0.3s ease;
     }
+
+    .search-button {
+        background-color: white;
+        color: black;
+        border: 1px solid #d6a2b8;
+    }
+
+        .search-button:hover {
+            background-color: rgb(214,162,184);
+            color: black;
+            border-color: rgb(214,162,184);
+        }
 
     .btn-create {
         background-color: white;
