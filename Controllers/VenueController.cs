@@ -139,14 +139,26 @@ namespace EventEaseApplication.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var venueEventEase = await _context.VenueEventEases.FindAsync(id);
-            if (venueEventEase != null)
+
+            if (venueEventEase == null)
             {
-                _context.VenueEventEases.Remove(venueEventEase);
+                return NotFound();
             }
 
+            bool hasActiveBookings = _context.BookingEventEases.Any(b => b.VenueId == id);
+
+            if (hasActiveBookings)
+            {
+
+                ModelState.AddModelError(string.Empty, "Cannot delete this venue because it is associated with an active booking.");
+                return View(venueEventEase);
+            }
+
+            _context.VenueEventEases.Remove(venueEventEase);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool VenueEventEaseExists(int id)
         {
