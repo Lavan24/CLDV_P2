@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using EventEaseApplication.Models;
+using EventEaseApplication.Services; // ✅ Make sure you include this to access BlobStorageServices
 
 namespace EventEaseApplication
 {
@@ -11,10 +12,19 @@ namespace EventEaseApplication
 
             // Add DbContext
             builder.Services.AddDbContext<EventEaseDataBaseContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddSingleton<BlobStorageServices>(provider =>
+            {
+                var config = provider.GetRequiredService<IConfiguration>();
+                var connectionString = config.GetConnectionString("BlobStorage");  // Reads from "ConnectionStrings" section
+                var containerName = config.GetValue<string>("BlobSettings:ContainerName");  // Reads from "BlobSettings:ContainerName"
+
+                return new BlobStorageServices(connectionString, containerName);
+            });
 
             var app = builder.Build();
 
@@ -22,7 +32,6 @@ namespace EventEaseApplication
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
