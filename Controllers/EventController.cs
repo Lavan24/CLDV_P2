@@ -53,7 +53,7 @@ namespace EventEaseApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventId,EventName,EventDate,EventDescription")] EventEventEase eventEventEase)
+        public async Task<IActionResult> Create([Bind("EventId,EventName,EventDate,EventDescription,Event_Time")] EventEventEase eventEventEase)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace EventEaseApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventId,EventName,EventDate,EventDescription")] EventEventEase eventEventEase)
+        public async Task<IActionResult> Edit(int id, [Bind("EventId,EventName,EventDate,EventDescription,Event_Time")] EventEventEase eventEventEase)
         {
             if (id != eventEventEase.EventId)
             {
@@ -139,14 +139,25 @@ namespace EventEaseApplication.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var eventEventEase = await _context.EventEventEases.FindAsync(id);
-            if (eventEventEase != null)
+
+            if (eventEventEase == null)
             {
-                _context.EventEventEases.Remove(eventEventEase);
+                return NotFound();
             }
 
+            bool hasActiveBookings = _context.BookingEventEases.Any(b => b.EventId == id);
+
+            if (hasActiveBookings)
+            {
+                ModelState.AddModelError(string.Empty, "Cannot delete this event because it is associated with an active booking.");
+                return View(eventEventEase);
+            }
+
+            _context.EventEventEases.Remove(eventEventEase);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool EventEventEaseExists(int id)
         {

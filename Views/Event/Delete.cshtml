@@ -1,5 +1,7 @@
 ﻿@model EventEaseApplication.Models.EventEventEase
 
+<div asp-validation-summary="All" class="text-danger"></div>
+
 @{
     ViewData["Title"] = "Delete Event";
 }
@@ -31,6 +33,12 @@
                         </dt>
                         <dd class="col-sm-9">
                             @Html.DisplayFor(model => model.EventDescription)
+                        </dd>
+                        <dt class="col-sm-3">
+                            Event Time:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @Html.DisplayFor(model => model.Event_Time)
                         </dd>
                     </dl>
                 </div>

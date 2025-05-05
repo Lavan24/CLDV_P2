@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EventEaseApplication.Models;
+using EventEaseApplication.Services; // ✅ Make sure this matches your BlobStorageServices namespace
 
 namespace EventEaseApplication.Controllers
 {
     public class VenueController : Controller
     {
         private readonly EventEaseDataBaseContext _context;
+        private readonly BlobStorageServices _blobStorageService; // ✅ Added Blob storage service
 
-        public VenueController(EventEaseDataBaseContext context)
+        public VenueController(EventEaseDataBaseContext context, BlobStorageServices blobStorageService)
         {
             _context = context;
+            _blobStorageService = blobStorageService; // ✅ Initialize blob storage service
         }
 
         // GET: Venue
@@ -49,14 +53,24 @@ namespace EventEaseApplication.Controllers
         }
 
         // POST: Venue/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VenueId,VenueName,VenueLocation,VenueCapacity,ImageUrl")] VenueEventEase venueEventEase)
+        public async Task<IActionResult> Create([Bind("VenueId,VenueName,VenueLocation,VenueCapacity")] VenueEventEase venueEventEase, IFormFile imageFile)
         {
             if (ModelState.IsValid)
             {
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    var containerClient = await _blobStorageService.GetContainerAsync();
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                    var blobClient = containerClient.GetBlobClient(fileName);
+
+                    using var stream = imageFile.OpenReadStream();
+                    await blobClient.UploadAsync(stream, overwrite: true);
+
+                    venueEventEase.ImageUrl = blobClient.Uri.ToString(); // ✅ Save image URL
+                }
+
                 _context.Add(venueEventEase);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -81,8 +95,6 @@ namespace EventEaseApplication.Controllers
         }
 
         // POST: Venue/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("VenueId,VenueName,VenueLocation,VenueCapacity,ImageUrl")] VenueEventEase venueEventEase)
@@ -139,14 +151,26 @@ namespace EventEaseApplication.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var venueEventEase = await _context.VenueEventEases.FindAsync(id);
-            if (venueEventEase != null)
+
+            if (venueEventEase == null)
             {
-                _context.VenueEventEases.Remove(venueEventEase);
+                return NotFound();
             }
 
+            bool hasActiveBookings = _context.BookingEventEases.Any(b => b.VenueId == id);
+
+            if (hasActiveBookings)
+            {
+
+                ModelState.AddModelError(string.Empty, "Cannot delete this venue because it is associated with an active booking.");
+                return View(venueEventEase);
+            }
+
+            _context.VenueEventEases.Remove(venueEventEase);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool VenueEventEaseExists(int id)
         {
